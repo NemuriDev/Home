@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lumina Travel | Premium Experiences</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-light: #f1f5f9;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-dark);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: white;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* HERO */
+        #home {
+            height: 85vh;
+            background: linear-gradient(rgba(15,23,42,0.7), rgba(15,23,42,0.7)),
+            url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2021&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            margin-top: 1.5rem;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* DESTINATIONS */
+        #destinations {
+            padding: 5rem 5%;
+            background: var(--primary-light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border: 1px solid var(--border-color);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 1.5rem;
+        }
+
+        .price {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* BOOKING */
+        #booking {
+            padding: 5rem 5%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .booking-form {
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #1e293b;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media(max-width:768px){
+            .booking-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Popup Background */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Show popup when targeted */
+#popup:target {
+    display: flex;
+}
+
+/* Popup Box */
+.popup-content {
+    background: white;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    animation: pop 0.3s ease;
+}
+
+/* Animation */
+@keyframes pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.close-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 10px 20px;
+    background: #0f172a;
+    color: white;
+    text-decoration: none;
+}
+        
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Lumina.</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#booking">Booking</a></li>
+    </ul>
+</nav>
+
+<section id="home">
+    <div class="hero-content">
+        <h1>Journey Beyond Boundaries</h1>
+        <p>Experience exclusive destinations designed for the modern explorer.</p>
+        <a href="#destinations" class="btn">Explore Destinations</a>
+    </div>
+</section>
+
+<section id="destinations">
+    <h2>Curated Destinations</h2>
+
+    <div class="gallery-grid">
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1368&q=80">
+            <div class="card-details">
+                <h3>Maldives Escape</h3>
+                <p>5 Nights. All Inclusive.</p>
+                <span class="price">From $2,400</span>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1499856871940-a09627c6d7db?auto=format&fit=crop&w=1367&q=80">
+            <div class="card-details">
+                <h3>Parisian Getaway</h3>
+                <p>3 Nights. City Tour Included.</p>
+                <span class="price">From $1,850</span>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1369&q=80">
+            <div class="card-details">
+                <h3>Kyoto & Tokyo</h3>
+                <p>7 Nights. Cultural Guides.</p>
+                <span class="price">From $3,100</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="booking">
+    <div class="booking-wrapper">
+
+        <div>
+            <h2>Plan Your Next Adventure</h2>
+            <p>Fill out the form to receive a personalized itinerary.</p>
+        </div>
+
+        <form class="booking-form" action="#" method="post">
+
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Destination</label>
+                <select>
+                    <option>Maldives</option>
+                    <option>Paris</option>
+                    <option>Japan</option>
+                    <option>Custom Trip</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Travelers</label>
+                <input type="number" min="1" value="2">
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Date</label>
+                <input type="date" required>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Requests</label>
+                <input type="text">
+            </div>
+
+            <a href="#popup" class="submit-btn" style="display:block; text-align:center; text-decoration:none;">Request Quote</a>
+
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="logo" style="color:white;">Lumina.</div>
+    <p>© 2026 Lumina Travel. All Rights Reserved.</p>
+</footer>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Booking Request Sent!</h2>
+        <p>Thank you for choosing Lumina Travel. Check Your Email for Conformation Copy.</p>
+        <a href="#" class="close-btn">Close</a>
+    </div>
+</div>
+</body>
+</html>
