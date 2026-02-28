@@ -293,7 +293,7 @@
         </div>
 
         <div class="destination-card">
-            <img src="https://images.unsplash.com/photo-1499856871940-a09627c6d7db?auto=format&fit=crop&w=1367&q=80">
+            <img src="https://i0.wp.com/rachylewis.com/wp-content/uploads/2023/07/IMG_7186.jpg?resize=1290%2C860&ssl=1">
             <div class="card-details">
                 <h3>Parisian Getaway</h3>
                 <p>3 Nights. City Tour Included.</p>
@@ -321,21 +321,21 @@
             <p>Fill out the form to receive a personalized itinerary.</p>
         </div>
 
-        <form class="booking-form" action="#" method="post">
+        <form id="bookingForm" class="booking-form">
 
             <div class="form-group">
                 <label>First Name</label>
-                <input type="text" required>
+                <input type="text" id="firstName" required>
             </div>
 
             <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" required>
+                <input type="text" id="lastName" required>
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" required>
+                <input type="email" id="email" required>
             </div>
 
             <div class="form-group">
@@ -363,7 +363,7 @@
                 <input type="text">
             </div>
 
-            <a href="#popup" class="submit-btn" style="display:block; text-align:center; text-decoration:none;">Request Quote</a>
+            <button type="submit" class="submit-btn">Request Quote</button>
 
         </form>
     </div>
@@ -382,4 +382,14 @@
     </div>
 </div>
 </body>
+<script>
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+    if (!this.checkValidity()) {
+        return; // Browser will show field warning automatically
+    }
+
+    e.preventDefault();
+    window.location.href = "#popup";
+});
+</script>
 </html>
